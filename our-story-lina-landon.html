@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Our Story – Lina & Landon</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Sacramento&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --bg: #f7f7ff;
+      --accent: #6ee7b7;        /* antes rosa, ahora verde clarito */
+      --accent-soft: #e0fbea;   /* verde muy suave */
+      --accent-2: #7ad9ff;
+      --text-main: #2b2b3c;
+      --card-bg: #ffffff;
+      --shadow-soft: 0 14px 35px rgba(15, 23, 42, 0.08);
+      --radius-lg: 24px;
+      --radius-pill: 999px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      background: radial-gradient(
+        circle at top left,
+        var(--accent-soft),
+        #f7f7ff 45%,
+        #e2f4ff
+      );
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 0;
+      margin: 0;
+    }
+
+    /* ==== Layout general ==== */
+    .page {
+      max-width: 960px;
+      margin: 24px auto 48px;
+      padding: 16px;
+    }
+
+    /* ==== Hero ==== */
+    .hero {
+      background: linear-gradient(135deg, #a7f3d0, #6ee7b7, #7ad9ff);
+      border-radius: 32px;
+      padding: 32px 24px 40px;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+      color: #fff;
+    }
+
+    .hero::before {
+      content: "♡";
+      position: absolute;
+      font-family: "Sacramento", cursive;
+      font-size: 120px;
+      opacity: 0.15;
+      right: -10px;
+      top: -40px;
+    }
+
+    .hero-small-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.16);
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      font-size: 12px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .hero-title {
+      font-family: "Sacramento", cursive;
+      font-size: 42px;
+      margin-bottom: 6px;
+    }
+
+    .hero-subtitle {
+      font-size: 16px;
+      max-width: 520px;
+      opacity: 0.95;
+    }
+
+    .hero-meta {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 13px;
+      opacity: 0.9;
+    }
+
+    .hero-pill {
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(6px);
+    }
+
+    /* ==== Navegación de capítulos ==== */
+    .chapters-nav {
+      margin-top: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+    }
+
+    .chapters-nav button {
+      border: none;
+      padding: 8px 14px;
+      border-radius: var(--radius-pill);
+      font-size: 13px;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.85);
+      color: var(--text-main);
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: transform 0.13s ease, box-shadow 0.13s ease, background 0.13s ease;
+    }
+
+    .chapters-nav button span.emoji {
+      font-size: 15px;
+    }
+
+    .chapters-nav button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 22px rgba(15, 23, 42, 0.12);
+      background: #ffffff;
+    }
+
+    /* ==== Contenedor de capítulos ==== */
+    .timeline {
+      margin-top: 32px;
+      position: relative;
+      padding-left: 14px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 4px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: linear-gradient(to bottom, #6ee7b7, #a7f3d0, #7ad9ff);
+      opacity: 0.6;
+    }
+
+    .chapter-card {
+      position: relative;
+      margin-bottom: 28px;
+    }
+
+    .chapter-dot {
+      position: absolute;
+      left: -4px;
+      top: 18px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #fff;
+      border: 2px solid #6ee7b7;
+      box-shadow: 0 0 0 4px rgba(110, 231, 183, 0.15);
+    }
+
+    .chapter {
+      margin-left: 22px;
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      padding: 20px 20px 18px;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .chapter-header {
+      margin-bottom: 8px;
+    }
+
+    .chapter-label {
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      color: #888;
+      margin-bottom: 4px;
+    }
+
+    .chapter-title {
+      font-size: 20px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .chapter-title span.emoji {
+      font-size: 22px;
+    }
+
+    .chapter-body p {
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .chapter-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    .chapter-note {
+      font-size: 12px;
+      opacity: 0.8;
+      margin-top: 4px;
+    }
+
+    /* ==== Zona fotos (carrusel debajo del texto) ==== */
+    .photos-panel {
+      border-radius: 18px;
+      background: linear-gradient(145deg, #f9fffd, #f3fbff);
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      border: 1px dashed rgba(148, 163, 184, 0.6);
+    }
+
+    .photos-title {
+      font-size: 12px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #475569;
+    }
+
+    .photos-title span.badge {
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #bbf7d0;
+      color: #166534;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .photo-grid {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      scroll-snap-type: x mandatory;
+    }
+
+    .photo-grid::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .photo-grid::-webkit-scrollbar-track {
+      background: #e2e8f0;
+      border-radius: 999px;
+    }
+
+    .photo-grid::-webkit-scrollbar-thumb {
+      background: #94a3b8;
+      border-radius: 999px;
+    }
+
+    .photo-slot {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      min-height: 360px;
+      min-width: 880px;
+      max-height: 520px;
+      max-width: 640px;
+      background: #e2e8f0;
+      display: grid;
+      place-items: center;
+      font-size: 11px;
+      color: #475569;
+      text-align: center;
+      padding: 6px;
+      scroll-snap-align: start;
+      flex: 0 0 auto;
+    }
+
+    .photo-slot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 10px;
+    }
+
+    .photo-slot span.placeholder-label {
+      opacity: 0.8;
+    }
+
+    .photos-hint {
+      font-size: 11px;
+      color: #64748b;
+    }
+
+    /* ==== Chapter 5 – mensaje final ==== */
+    .chapter--highlight {
+      background: radial-gradient(circle at top left, #e0fbea, #ffffff 45%);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+
+    .chapter--highlight .chapter-title {
+      color: #047857;
+    }
+
+    .birthday-footer {
+      margin-top: 10px;
+      font-size: 13px;
+      font-style: italic;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .signature {
+      margin-top: 6px;
+      font-family: "Sacramento", cursive;
+      font-size: 26px;
+      color: #10b981;
+    }
+
+    /* ==== Botón volver arriba ==== */
+    .to-top {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      border: none;
+      background: #ffffff;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.18);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      font-size: 18px;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .to-top.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .to-top:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.22);
+    }
+
+    /* ==== Responsivo ==== */
+    @media (max-width: 768px) {
+      .hero {
+        padding: 24px 18px 30px;
+      }
+
+      .hero-title {
+        font-size: 34px;
+      }
+
+      .page {
+        padding: 10px;
+      }
+
+      .photo-slot {
+        min-width: 120px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- HERO -->
+    <header class="hero" id="top">
+      <div class="hero-small-tag">
+        <span>💌</span>
+        <span>Our Story</span>
+      </div>
+      <h1 class="hero-title">Lina &amp; Landon</h1>
+      <p class="hero-subtitle">
+        A little love letter for your birthday, to remember how far we've come,
+        how much we've grown, and how grateful I am for every step we’ve taken together.
+      </p>
+      <div class="hero-meta">
+        <span class="hero-pill">For: Landon 🎂</span>
+        <span class="hero-pill">From: Lina 💕</span>
+        <span class="hero-pill">Status: Very in love</span>
+      </div>
+
+      <!-- Navegación de capítulos -->
+      <nav class="chapters-nav" aria-label="Story chapters">
+        <button data-target="#chapter-1">
+          <span class="emoji">✨</span>
+          <span>How we met</span>
+        </button>
+        <button data-target="#chapter-2">
+          <span class="emoji">💋</span>
+          <span>First dates</span>
+        </button>
+        <button data-target="#chapter-3">
+          <span class="emoji">📚</span>
+          <span>Distance &amp; growth</span>
+        </button>
+        <button data-target="#chapter-4">
+          <span class="emoji">🌎</span>
+          <span>Our travels</span>
+        </button>
+        <button data-target="#chapter-5">
+          <span class="emoji">🎂</span>
+          <span>Birthday message</span>
+        </button>
+      </nav>
+    </header>
+
+    <!-- TIMELINE / CHAPTERS -->
+    <main class="timeline">
+      <!-- CHAPTER 1 -->
+      <article class="chapter-card" id="chapter-1">
+        <div class="chapter-dot"></div>
+        <section class="chapter">
+          <div>
+            <header class="chapter-header">
+              <div class="chapter-label">Chapter 1</div>
+              <h2 class="chapter-title">
+                <span class="emoji">✨</span>
+                <span>How We Met</span>
+              </h2>
+            </header>
+            <div class="chapter-body">
+              <p>
+                Who would have thought that, when I was trying to hide from the world
+                and at the same time trying to figure out what my next step in life would be,
+                I would end up finding the love of my life?
+              </p>
+              <p>
+                I found you in a place that wasn’t exactly pretty or safe (to be honest) —
+                but that place gave me the most beautiful person, the one who would make me
+                feel more safe than anyone else ever has.
+              </p>
+              <p>
+                I’ve always said it, my love:
+                <strong>the best thing Taganga ever gave me was you.</strong> 🌊💕
+              </p>
+            </div>
+          </div>
+
+          <!-- FOTOS CAP 1 -->
+          <aside class="photos-panel">
+            <div class="photos-title">
+              <span>Photos · Taganga days</span>
+            </div>
+            <div class="photo-grid">
+              <div class="photo-slot">
+                <img src="imagenes/taganga1.jpg" alt="Taganga – where we met" />
+              </div>
+              <div class="photo-slot">
+                <img src="imagenes/taganga.JPG" alt="Us in Taganga" />
+              </div>
+              <div class="photo-slot">
+                <img src="imagenes/taganga2.jpg" alt="Taganga memories" />
+              </div>
+              <div class="photo-slot">
+                <img src="imagenes/taganga4.JPG" alt="Taganga memories" />
+              </div>
+              <div class="photo-slot">
+                <img src="imagenes/taganga5.JPG" alt="Taganga memories" />
+              </div>
+            </div>
+          </aside>
+        </section>
+      </article>
+
+      <!-- CHAPTER 2 -->
+      <article class="chapter-card" id="chapter-2">
+        <div class="chapter-dot"></div>
+        <section class="chapter">
+          <div>
+            <header class="chapter-header">
+              <div class="chapter-label">Chapter 2</div>
+              <h2 class="chapter-title">
+                <span class="emoji">💋</span>
+                <span>First Dates &amp; First Adventures</span>
+              </h2>
+            </header>
+            <div class="chapter-body">
+              <p>
+                Our first trip! And also our first kiss — of course. 😏💋
+              </p>
+              <p>
+                You were, as always, giving me so much safety and reassurance,
+                and I was up in the clouds thinking:
+                <em>"Are we moving too fast?"</em>
+              </p>
+              <p>
+                I don’t regret anything, my love. I love every part of our story,
+                every silly moment, every deep talk, and every time you’ve made me laugh
+                until my stomach hurts.
+              </p>
+            </div>
+          </div>
+
+          <!-- FOTOS CAP 2 -->
+          <aside class="photos-panel">
+            <div class="photos-title">
+              <span>Photos · First trip</span>
+              <span class="badge">memories</span>
+            </div>
+            <div class="photo-grid">
+              <div class="photo-slot">
+                <img src="imagenes/bogota.jpg" alt="Our first trip together" />
+              </div>
+              <div class="photo-slot">
+                <img src="imagenes/bogota1.jpg" alt="First kiss moment" />
+              </div>
+              <div class="photo-slot">
+                <img src="imagenes/bogota2.jpg" alt="First kiss moment" />
+              </div>
+              <div class="photo-slot">
+                <img src="imagenes/bogota3.jpg" alt="First kiss moment" />
+              </div>
+              <div class="photo-slot">
+                <img src="imagenes/bogota4.jpg" alt="First kiss moment" />
+              </div>
+            </div>
+          </aside>
+        </section>
+      </article>
+
+      <!-- CHAPTER 3 -->
+      <article class="chapter-card" id="chapter-3">
+        <div class="chapter-dot"></div>
+        <section class="chapter">
+          <div>
+            <header class="chapter-header">
+              <div class="chapter-label">Chapter 3</div>
+              <h2 class="chapter-title">
+                <span class="emoji">📚</span>
+                <span>Difficult (But Important) Moments</span>
+              </h2>
+            </header>
+            <div class="chapter-body">
+              <p>
+                Then distance showed up — and it was hard for me.
+                But without your support and your constant reassurance,
+                it wouldn’t have been so bearable.
+              </p>
+              <p>
+                You helped me find a path in life. You helped me study,
+                and you were there for every part of my journey to becoming a programmer.
+              </p>
+              <p>
+                We turned distance into an opportunity:
+                movie nights, a glass of wine over video call,
+                long talks and shared dinners through a screen.
+                Somehow, we still managed to feel close. (Sorry I don't have many photos... hmm, distance I guess hahaha)
+              </p>
+            </div>
+          </div>
+
+          <!-- FOTOS CAP 3 -->
+          <aside class="photos-panel">
+            <div class="photos-title">
+              <span>Photos · Distance days</span>
+              <span class="badge">online love</span>
+            </div>
+            <div class="photo-grid">
+              <div class="photo-slot">
+                <img src="imagenes/distancia2.jpg"/>
+              </div>
+            </div>
+          </aside>
+        </section>
+      </article>
+
+      <!-- CHAPTER 4 -->
+      <article class="chapter-card" id="chapter-4">
+        <div class="chapter-dot"></div>
+        <section class="chapter">
+          <div>
+            <header class="chapter-header">
+              <div class="chapter-label">Chapter 4</div>
+              <h2 class="chapter-title">
+                <span class="emoji">🌎</span>
+                <span>Our Travels This Year</span>
+              </h2>
+            </header>
+            <div class="chapter-body">
+              <p>
+                This year, we had the chance to be in
+                <strong>four different countries together</strong>!
+              </p>
+              <p>
+                We started with <strong>Colombia</strong>. It made me so happy that you
+                got to meet my family and friends, and that the connection felt so natural.
+                Everyone still asks about you all the time. They are ready to see you again. 🇨🇴
+              </p>
+              <p>
+                Then came <strong>Chile</strong>, with its beautiful vineyards
+                and hiking trails. 🍷⛰️
+              </p>
+              <p>
+                I loved our time in <strong>Peru</strong> —
+                discovering and learning about the Inca culture with you,
+                exploring each temple, and sharing each dish.
+                <em>(We absolutely need to go back.)</em> 🇵🇪
+              </p>
+              <p>
+                Our last destination was <strong>Ecuador</strong>. 🇪🇨<br />
+                It was important to me that we were there for Joss while she was going
+                through such a difficult moment. Thank you, baby, for listening to her,
+                giving her advice, and even making her cocktails when she wasn’t feeling her best.
+              </p>
+              <p>
+                And I have to confess… hiking <strong>Cotopaxi</strong> was
+                incredibly challenging. We supported each other the entire time —
+                only the two of us truly know how hard it was, how exhausted we were…
+                and how rewarding it felt to finally get out of there and meet Eduardo in the end.
+              </p>
+              <p class="chapter-note">
+                (Also, we both know I complained at least 100 times on that hike. But I’d do it again with you, I would do it again with you, but only up to the big rock and that's it, without going any further down from that rock.) 😅
+              </p>
+            </div>
+          </div>
+
+          <!-- FOTOS CAP 4 -->
+          <aside class="photos-panel">
+            <div class="photos-title">
+              <span>Photos · This year’s adventures</span>
+              <span class="badge">4 countries</span>
+            </div>
+            <div class="photo-grid">
+              <div class="photo-slot">
+                <img src="imagenes/viajes.JPG" alt="In Colombia with family" />
+              </div>
+              <div class="photo-slot">
+                <img src="imagenes/viajes1.jpg" alt="Vineyard in Chile" />
+              </div>
+              <div class="photo-slot">
+                <img src="imagenes/viajes2.jpg" alt="Inca ruins in Peru" />
+              </div>
+              <div class="photo-slot">
+                <img src="imagenes/viajes3.jpg" alt="Trip in Ecuador" />
+              </div>
+              <div class="photo-slot">
+                <img src="imagenes/viajes4.jpg" alt="Trip in Ecuador" />
+              </div>
+              <div class="photo-slot">
+                <img src="imagenes/viajes16.jpg" alt="Trip in Ecuador" />
+              </div>
+              <div class="photo-slot">
+                <img src="imagenes/viajes15.jpg" alt="Trip in Ecuador" />
+              </div>
+              <div class="photo-slot">
+                <img src="imagenes/viajes7.jpg" alt="Trip in Ecuador" />
+              </div>
+              <div class="photo-slot">
+                <img src="imagenes/viajes8.jpg" alt="Trip in Ecuador" />
+              </div>
+              <div class="photo-slot">
+                <img src="imagenes/viajes9.jpg" alt="Trip in Ecuador" />
+              </div>
+              <div class="photo-slot">
+                <img src="imagenes/viajes10.jpg" alt="Trip in Ecuador" />
+              </div>
+              <div class="photo-slot">
+                <img src="imagenes/viajes11.jpg" alt="Trip in Ecuador" />
+              </div>
+              <div class="photo-slot">
+                <img src="imagenes/viajes12.jpg" alt="Trip in Ecuador" />
+              </div>
+              <div class="photo-slot">
+                <img src="imagenes/viajes13.JPG" alt="Trip in Ecuador" />
+              </div>
+              <div class="photo-slot">
+                <img src="imagenes/viajes14.JPG" alt="Trip in Ecuador" />
+              </div>
+              <div class="photo-slot">
+                <img src="imagenes/viajes18.jpg" alt="Trip in Ecuador" />
+              </div>
+              <div class="photo-slot">
+                <img src="imagenes/quito67_2025.JPG" alt="Trip in Ecuador" />
+              </div>
+              <div class="photo-slot">
+                <img src="imagenes/quito7_2025.JPG" alt="Trip in Ecuador" />
+              </div>
+            </div>
+          </aside>
+        </section>
+      </article>
+
+      <!-- CHAPTER 5 -->
+      <article class="chapter-card" id="chapter-5">
+        <div class="chapter-dot"></div>
+        <section class="chapter chapter--highlight">
+          <div>
+            <header class="chapter-header">
+              <div class="chapter-label">Chapter 5</div>
+              <h2 class="chapter-title">
+                <span class="emoji">🎂</span>
+                <span>Birthday Message</span>
+              </h2>
+            </header>
+            <div class="chapter-body">
+              <p>
+                Here’s our story (summarized)!
+              </p>
+              <p>
+                I know I’m not perfect and our relationship isn’t perfect either,
+                but I love our relationship a lot.
+              </p>
+              <p>
+                I love how honest we are.
+              </p>
+              <p>
+                I love the challenges we face.
+              </p>
+              <p>
+                I love that we’re always there for each other.
+              </p>
+              <p>
+                I love our jokes, our hugs and kisses, our plans.
+              </p>
+              <p>
+                I love that there’s always something new to improve,
+                because it helps us grow and it makes our relationship stronger.
+              </p>
+              <p>
+                I am so happy to have you in my life.
+                I’m deeply grateful to God for bringing our paths together
+                and for allowing us to live so many beautiful experiences side by side.
+              </p>
+              <p>
+                I hope that this year brings us even more adventures,
+                more new moments in our relationship,
+                and the blessing of continuing to have you by my side.
+              </p>
+              <p>
+                Thank you for being the man who supports me and helps me
+                with absolutely everything.
+                God truly blessed me with you — <strong>you are incredible.</strong>
+              </p>
+              <div class="birthday-footer">
+                <p>
+                  <strong>Happy birthday, my love!</strong> 🎉🥳💙
+                </p>
+                <p>
+                  I love you with all my heart.
+                  I miss you every second, and I’m counting the days
+                  until I can hug you and kiss you again.
+                </p>
+                <div class="signature">Te amo, Lina 💌</div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </article>
+    </main>
+  </div>
+
+  <!-- BOTÓN VOLVER ARRIBA -->
+  <button class="to-top" id="toTopBtn" aria-label="Back to top">
+    ↑
+  </button>
+
+  <script>
+    // Navegación suave a los capítulos
+    document.querySelectorAll(".chapters-nav button").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const target = btn.getAttribute("data-target");
+        if (!target) return;
+        const el = document.querySelector(target);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
+    });
+
+    // Botón "volver arriba"
+    const toTopBtn = document.getElementById("toTopBtn");
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 260) {
+        toTopBtn.classList.add("visible");
+      } else {
+        toTopBtn.classList.remove("visible");
+      }
+    });
+
+    toTopBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  </script>
+</body>
+</html>
